@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 public class EditItemActivity extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class EditItemActivity extends AppCompatActivity {
         position = getIntent().getIntExtra("position", -1);
         itemDetails = getIntent().getStringExtra("item");
         etEditItem.setText(itemDetails);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         etEditItem.requestFocus();
     }
 
