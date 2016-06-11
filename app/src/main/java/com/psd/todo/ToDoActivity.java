@@ -5,19 +5,20 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ToDoActivity extends AppCompatActivity {
-    ArrayList<ToDoItem> todoItems;
+    private List<ToDoItem> todoItems = new ArrayList<>();
+    RecyclerView rvItems;
     ToDoAdapter todoAdapter;
-    ListView lvItems;
 
     private final int REQ_CODE1 = 1;
 
@@ -26,10 +27,9 @@ public class ToDoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_to_do);
+        rvItems = (RecyclerView) findViewById(R.id.rvItems);
 
         populateArrayItems();
-
-        lvItems = (ListView) findViewById(R.id.lvItems);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
@@ -43,38 +43,34 @@ public class ToDoActivity extends AppCompatActivity {
                         }
             });
         }
-
-        lvItems.setAdapter(todoAdapter);
+        todoAdapter = new ToDoAdapter(todoItems);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        rvItems.setLayoutManager(mLayoutManager);
+        rvItems.setHasFixedSize(true);
+        //rvItems.setItemAnimator(new DefaultItemAnimator());
+        rvItems.setAdapter(todoAdapter);
 
         //invoked whenever a row is clicked
         //simple click
-        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(ToDoActivity.this, EditItemActivity.class);
-                i.putExtra("position", position);
-                i.putExtra("item", todoItems.get(position).task);
-                startActivityForResult(i, REQ_CODE1);
-            }
-        });
-        //click held down
-        lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                //todoItems.get(position).delete(); //active android
-                todoItems.remove(position);
-                todoAdapter.notifyDataSetChanged();
-                return true;
-            }
-        });
+
+//        Intent i = new Intent(ToDoActivity.this, EditItemActivity.class);
+//        i.putExtra("position", position);
+//        i.putExtra("item", todoItems.get(position).task);
+//        startActivityForResult(i, REQ_CODE1);
+
+        //LONG click
+//        todoItems.get(position).delete(); //active android
+//        todoItems.remove(position);
+//        todoAdapter.notifyDataSetChanged();
+//        return true;
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == resultCode) {
             int position = data.getExtras().getInt("position");
-            String item = data.getExtras().getString("newItem");
-            todoItems.get(position).task = item;
+            todoItems.get(position).task = data.getExtras().getString("newItem");
             todoItems.set(position, todoItems.get(position));
             todoAdapter.notifyDataSetChanged();
             //writeItems();
@@ -85,16 +81,13 @@ public class ToDoActivity extends AppCompatActivity {
 
     public void populateArrayItems() {
         todoItems = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 12; i++) {
             todoItems.add(new ToDoItem("Hello"));
-            todoItems.add(new ToDoItem("Goodbye"));
+            todoItems.add(new ToDoItem("Goodbye", ToDoItem.Priority.HIGH));
         }
 
-        //array adapters need 1. context, 2. resource, 3. list with which to attach
-        todoAdapter = new ToDoAdapter(this, todoItems);
-
-        //todoAdapter.addAll(ToDoItem.getAllItems());
-        //Log.d("all items", "here " + ToDoItem.getAllItems());
+//        todoAdapter.addAll(ToDoItem.getAllItems());
+//        Log.d("all items", "here " + ToDoItem.getAllItems());
     }
 
 
