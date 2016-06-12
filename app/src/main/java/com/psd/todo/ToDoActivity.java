@@ -16,7 +16,7 @@ import com.activeandroid.ActiveAndroid;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToDoActivity extends AppCompatActivity {
+public class ToDoActivity extends AppCompatActivity implements AddItemFragment.OnToDoItemSelectedListener {
     private List<ToDoItem> todoItems = new ArrayList<>();
     RecyclerView rvItems;
     ToDoAdapter todoAdapter;
@@ -29,8 +29,6 @@ public class ToDoActivity extends AppCompatActivity {
         ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_to_do);
         rvItems = (RecyclerView) findViewById(R.id.rvItems);
-
-        populateArrayItems();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (fab != null) {
@@ -80,12 +78,9 @@ public class ToDoActivity extends AppCompatActivity {
         }
     }
 
-    public void populateArrayItems() {
-        todoItems = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            todoItems.add(new ToDoItem("Hello"));
-            todoItems.add(new ToDoItem("Goodbye", ToDoItem.Priority.HIGH));
-        }
+    public void sendData(ToDoItem tdi) {
+        todoItems.add(tdi);
+        todoAdapter.notifyDataSetChanged();
 
 //        todoAdapter.addAll(ToDoItem.getAllItems());
 //        Log.d("all items", "here " + ToDoItem.getAllItems());

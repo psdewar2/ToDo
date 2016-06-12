@@ -1,5 +1,6 @@
 package com.psd.todo;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -18,8 +19,12 @@ public class AddItemFragment extends DialogFragment {
     ToDoItem.Priority priority;
     Button addItemButton;
 
-    public AddItemFragment() {
-        // Required empty public constructor
+    OnToDoItemSelectedListener mListener;
+
+    public AddItemFragment() {} // Required empty public constructor
+
+    public interface  OnToDoItemSelectedListener {
+        void sendData(ToDoItem tdi);
     }
 
     public static AddItemFragment newInstance() {
@@ -28,6 +33,20 @@ public class AddItemFragment extends DialogFragment {
 //        args.putString("title", title);
 //        fragment.setArguments(args);
         return new AddItemFragment();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mListener = (OnToDoItemSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnToDoItemSelectedListener");
+        }
     }
 
     @Override
@@ -63,9 +82,12 @@ public class AddItemFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (newItemEditText.getText().toString().equals("")) {
-                    dismiss();
+                    Toast.makeText(getContext(), "Please fill in the new task.", Toast.LENGTH_SHORT).show();
                 } else {
+                    String task = newItemEditText.getText().toString();
+                    mListener.sendData(new ToDoItem(task, priority));
                     Toast.makeText(getContext(), newItemEditText.getText().toString(), Toast.LENGTH_SHORT).show();
+                    dismiss();
                 }
 
             }
