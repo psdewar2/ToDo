@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     tools:context="com.psd.todo.ToDoActivity">
 
     <include layout="@layout/content_to_do" />
 
     <android.support.design.widget.FloatingActionButton
+        app:layout_behavior="com.psd.todo.ScrollAwareFABBehavior"
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

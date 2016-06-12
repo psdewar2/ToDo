@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -47,7 +48,7 @@ public class ToDoActivity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         rvItems.setLayoutManager(mLayoutManager);
         rvItems.setHasFixedSize(true);
-        //rvItems.setItemAnimator(new DefaultItemAnimator());
+        rvItems.setItemAnimator(new DefaultItemAnimator());
         rvItems.setAdapter(todoAdapter);
 
         //invoked whenever a row is clicked
@@ -72,7 +73,7 @@ public class ToDoActivity extends AppCompatActivity {
             int position = data.getExtras().getInt("position");
             todoItems.get(position).task = data.getExtras().getString("newItem");
             todoItems.set(position, todoItems.get(position));
-            todoAdapter.notifyDataSetChanged();
+            todoAdapter.notifyItemChanged(position); //use for item specific updates
             //writeItems();
 
             Toast.makeText(this, "Updated list item " + position, Toast.LENGTH_SHORT).show();

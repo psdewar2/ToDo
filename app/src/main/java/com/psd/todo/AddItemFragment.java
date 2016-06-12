@@ -63,7 +63,7 @@ public class AddItemFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (newItemEditText.getText().toString().equals("")) {
-                    Toast.makeText(getContext(), "Please fill in the new task.", Toast.LENGTH_SHORT).show();
+                    dismiss();
                 } else {
                     Toast.makeText(getContext(), newItemEditText.getText().toString(), Toast.LENGTH_SHORT).show();
                 }
