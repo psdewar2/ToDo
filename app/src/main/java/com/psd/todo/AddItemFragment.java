@@ -67,12 +67,12 @@ public class AddItemFragment extends DialogFragment {
         newItemEditText.requestFocus();
 
         RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        priority = ToDoItem.Priority.NORMAL; //makes normal priority the default
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.lowPriority) priority = ToDoItem.Priority.LOW;
-                else if (checkedId == R.id.normPriority) priority = ToDoItem.Priority.NORMAL;
-                else priority = ToDoItem.Priority.HIGH;
+                if (checkedId == R.id.highPriority) priority = ToDoItem.Priority.HIGH;
                 Toast.makeText(getContext(), "P is now " + priority.toString(), Toast.LENGTH_SHORT).show();
             }
         });

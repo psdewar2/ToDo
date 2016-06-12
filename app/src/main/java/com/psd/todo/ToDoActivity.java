@@ -49,13 +49,19 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
         rvItems.setItemAnimator(new DefaultItemAnimator());
         rvItems.setAdapter(todoAdapter);
 
-        //invoked whenever a row is clicked
-        //simple click
+        todoAdapter.setOnItemClickListener(new ToDoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                Intent i = new Intent(ToDoActivity.this, EditItemActivity.class);
+                i.putExtra("position", position);
+                i.putExtra("item", todoItems.get(position).task);
+                startActivityForResult(i, REQ_CODE1);
+            }
+        });
 
-//        Intent i = new Intent(ToDoActivity.this, EditItemActivity.class);
-//        i.putExtra("position", position);
-//        i.putExtra("item", todoItems.get(position).task);
-//        startActivityForResult(i, REQ_CODE1);
+        todoItems.add(new ToDoItem("Help mom with the cleaning", ToDoItem.Priority.LOW));
+        todoItems.add(new ToDoItem("Buy ticket to Senegal and bring her home", ToDoItem.Priority.NORMAL));
+        todoItems.add(new ToDoItem("Live a life of confident humility", ToDoItem.Priority.HIGH));
 
         //LONG click
 //        todoItems.get(position).delete(); //active android

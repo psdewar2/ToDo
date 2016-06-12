@@ -7,6 +7,7 @@
     <string name="dueDate">Due Date</string>
     <string name="title_activity_to_do">ToDo</string>
     <string name="newTask">New Task</string>
+    <string name="task">Task</string>
     <string name="priority">Priority</string>
     <string name="low">Low</string>
     <string name="normal">Normal</string>

@@ -36,20 +36,20 @@ public class ToDoItem extends Model {
         super();
     }
 
-    public ToDoItem(String task) {
-        super();
-        this.task = task;
-        this.priority = Priority.NORMAL;
-        this.dueDate = new Date();
-        this.details = "";
-    }
-
     public ToDoItem(String task, Priority priority) {
         super();
         this.task = task;
         this.priority = priority;
         this.dueDate = new Date();
         this.details = "";
+    }
+
+    public ToDoItem(String task, Priority priority, String details) {
+        super();
+        this.task = task;
+        this.priority = priority;
+        this.dueDate = new Date();
+        this.details = details;
     }
 
     //accessor method that returns all ToDoItem objects from List
