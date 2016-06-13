@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/recycler_vertical_margin"
     android:paddingTop="@dimen/recycler_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:paddingBottom="@dimen/recycler_vertical_margin"
     tools:context="com.psd.todo.ToDoActivity"
-    tools:showIn="@layout/activity_to_do">
+    tools:showIn="@layout/activity_to_do"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rvItems"
-        android:scrollbars="vertical"
-         />
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

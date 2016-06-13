@@ -16,15 +16,16 @@ import android.widget.Toast;
 
 public class AddItemFragment extends DialogFragment {
     EditText newItemEditText, detailsEditText;
+    Button addItemButton, cancelItemButton;
+    String task, details;
     ToDoItem.Priority priority;
-    String details;
-    Button addItemButton;
-
+    
     OnToDoItemSelectedListener mListener;
 
-    public AddItemFragment() {} // Required empty public constructor
+    public AddItemFragment() {
+    } // Required empty public constructor
 
-    public interface  OnToDoItemSelectedListener {
+    public interface OnToDoItemSelectedListener {
         void sendData(ToDoItem tdi);
     }
 
@@ -60,14 +61,18 @@ public class AddItemFragment extends DialogFragment {
     @Override //view lookups and attaching listeners
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        newItemEditText = (EditText) view.findViewById(R.id.newTaskEditText);
+        RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        detailsEditText = (EditText) view.findViewById(R.id.detailsEditText);
+        cancelItemButton = (Button) view.findViewById(R.id.cancelItem);
+        addItemButton = (Button) view.findViewById(R.id.btnAddItem);
+
         //no title
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        // Get field from view, show soft keyboard automatically, and request focus to field
-        newItemEditText = (EditText) view.findViewById(R.id.newTaskEditText);
+        // Request focus to field
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         newItemEditText.requestFocus();
 
-        RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         priority = ToDoItem.Priority.NORMAL; //makes normal priority the default
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -77,14 +82,11 @@ public class AddItemFragment extends DialogFragment {
             }
         });
 
-        detailsEditText = (EditText) view.findViewById(R.id.detailsEditText);
-
-        addItemButton = (Button) view.findViewById(R.id.btnAddItem);
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String task = newItemEditText.getText().toString();
-                String details = detailsEditText.getText().toString();
+                task = newItemEditText.getText().toString();
+                details = detailsEditText.getText().toString();
                 if (task.equals("")) {
                     Toast.makeText(getContext(), "Please fill in the new task.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -101,8 +103,12 @@ public class AddItemFragment extends DialogFragment {
             }
         });
 
-        // Fetch arguments from bundle and set title
-        //String title = getArguments().getString("title"); add default value if necessary
+        cancelItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
     }
 

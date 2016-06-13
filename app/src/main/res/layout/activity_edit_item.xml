@@ -1,86 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="wrap_content"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/recycler_vertical_margin"
+    android:paddingBottom="@dimen/recycler_vertical_margin"
     tools:context="com.psd.todo.EditItemActivity">
 
     <EditText
+        android:id="@+id/updateTaskEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/updateTaskEditText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:hint="@string/editTask" />
 
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/saveButton"
+        android:layout_below="@+id/updateTaskEditText"
+        android:layout_marginTop="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/changePriorityTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/priority"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/changePriorityTextView"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/lowPriority"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/low" />
+
+                <RadioButton
+                    android:id="@+id/normPriority"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/normal" />
+
+                <RadioButton
+                    android:id="@+id/highPriority"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/high" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/editDetailsEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radioGroupUpdate"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="@string/addDetails"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:id="@+id/dueDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editDetailsEditText"
+                android:layout_marginTop="20dp"
+                android:text="@string/dueDate"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/changeDueDateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/dueDateTextView"
+                android:text="Change Due Date" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
     <Button
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/update"
-        android:id="@+id/saveButton"
-        android:onClick="onUpdateItem"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="#000000"
-        android:text="@string/changePriority"
-        android:id="@+id/changePriorityTextView"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/updateTaskEditText"
-        android:layout_alignStart="@id/updateTaskEditText"
-        android:layout_alignLeft="@id/updateTaskEditText"/>
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/changePriorityTextView"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/radioGroupUpdate">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/low"
-            android:id="@+id/lowPriority" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/normal"
-            android:id="@+id/normPriority" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/high"
-            android:id="@+id/highPriority" />
-    </RadioGroup>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/editDetailsEditText"
-        android:layout_below="@+id/radioGroupUpdate"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="@string/addDetails"
-        android:layout_marginTop="20dp"/>
+        android:onClick="onUpdateItem"
+        android:text="@string/update"
+        android:theme="@style/ToDoButton"/>
 
 </RelativeLayout>
+
+

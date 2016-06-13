@@ -59,6 +59,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
                 i.putExtra("task", todoItems.get(position).task);
                 i.putExtra("priority", todoItems.get(position).priority);
                 i.putExtra("details", todoItems.get(position).details);
+                i.putExtra("dueDate", todoItems.get(position).dueDate);
                 startActivityForResult(i, REQ_CODE1);
             }
         });
@@ -106,6 +107,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
             todoItems.get(position).task = data.getExtras().getString("task");
             todoItems.get(position).priority = (ToDoItem.Priority) data.getExtras().getSerializable("priority");
             todoItems.get(position).details = data.getExtras().getString("details");
+            todoItems.get(position).dueDate = data.getExtras().getString("dueDate");
             todoItems.set(position, todoItems.get(position));
             todoAdapter.notifyItemChanged(position); //use for item specific updates
 

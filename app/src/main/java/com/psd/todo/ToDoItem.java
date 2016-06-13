@@ -5,7 +5,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 /**MODEL
@@ -25,8 +25,9 @@ public class ToDoItem extends Model {
     @Column(name = "Priority")
     protected Priority priority;
 
+    Calendar c = Calendar.getInstance();
     @Column(name = "Due Date")
-    protected Date dueDate;
+    protected String dueDate;
 
     @Column(name = "Details", index = true)
     protected String details;
@@ -40,7 +41,9 @@ public class ToDoItem extends Model {
         super();
         this.task = task;
         this.priority = priority;
-        this.dueDate = new Date();
+
+        this.dueDate = "Due " + (c.get(Calendar.MONTH) + 1) + "/" +
+                        c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.YEAR);
         this.details = "";
     }
 
@@ -48,7 +51,8 @@ public class ToDoItem extends Model {
         super();
         this.task = task;
         this.priority = priority;
-        this.dueDate = new Date();
+        this.dueDate = "Due " + (c.get(Calendar.MONTH) + 1) + "/" +
+                c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.YEAR);
         this.details = details;
     }
 

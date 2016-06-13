@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.psd.todo.AddItemFragment">
+    <!--android:background="#FFFFA5"-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,105 +15,122 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <TextView
+            android:id="@+id/newTaskTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/newTask"
-            android:textStyle="bold"
-            android:id="@+id/newTaskTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:text="@string/newTask"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/newTaskEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/newTaskEditText"
-            android:layout_below="@+id/newTaskTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/newTaskTextView" />
 
         <TextView
+            android:id="@+id/priorityTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/priority"
-            android:textStyle="bold"
-            android:id="@+id/priorityTextView"
-            android:layout_below="@+id/newTaskEditText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="32dp" />
+            android:layout_below="@+id/newTaskEditText"
+            android:layout_marginTop="32dp"
+            android:text="@string/priority"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
 
         <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_below="@+id/priorityTextView"
             android:layout_centerHorizontal="true"
-            android:id="@+id/radioGroup">
+            android:orientation="horizontal">
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/low"
                 android:id="@+id/lowPriority"
-                android:checked="false" />
-
-            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/normal"
+                android:checked="false"
+                android:text="@string/low" />
+            <RadioButton
                 android:id="@+id/normPriority"
-                android:checked="true" />
-
-            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/high"
+                android:checked="true"
+                android:text="@string/normal" />
+
+            <RadioButton
                 android:id="@+id/highPriority"
-                android:checked="false" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/high" />
         </RadioGroup>
 
         <TextView
+            android:id="@+id/details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/details"
-            android:textStyle="bold"
-            android:id="@+id/details"
-            android:layout_below="@+id/radioGroup"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="32dp" />
+            android:layout_below="@+id/radioGroup"
+            android:layout_marginTop="32dp"
+            android:text="@string/details"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/detailsEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/detailsEditText"
-            android:layout_below="@+id/details"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/btnAddItem"
-            android:layout_alignEnd="@+id/btnAddItem" />
+            android:layout_alignRight="@+id/btnLinearLayout"
+            android:layout_alignEnd="@+id/btnLinearLayout"
+            android:layout_below="@+id/details"
+            android:inputType="textMultiLine"
+            android:ems="10" />
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
+        <LinearLayout
+            android:id="@+id/btnLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_item"
-            android:id="@+id/btnAddItem"
-            android:layout_marginTop="32dp"
-            android:layout_below="@+id/detailsEditText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/newTaskEditText"
-            android:layout_alignEnd="@+id/newTaskEditText" />
+            android:layout_alignEnd="@+id/newTaskEditText"
+            android:layout_below="@+id/detailsEditText"
+            android:layout_marginTop="32dp"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/cancelItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:layout_weight=".5"/>
+
+            <Button
+                android:id="@+id/btnAddItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/add_item"
+                android:theme="@style/ToDoButton"
+                android:layout_weight=".5"/>
+
+        </LinearLayout>
+
+
 
     </RelativeLayout>
 
