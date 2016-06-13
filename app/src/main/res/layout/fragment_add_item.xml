@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/activityBackground"
     tools:context="com.psd.todo.AddItemFragment">
-    <!--android:background="#FFFFA5"-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,8 +24,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:text="@string/newTask"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
+            android:theme="@style/ToDoTextView" />
 
         <EditText
             android:id="@+id/newTaskEditText"
@@ -46,8 +45,7 @@
             android:layout_below="@+id/newTaskEditText"
             android:layout_marginTop="32dp"
             android:text="@string/priority"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
+            android:theme="@style/ToDoTextView" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -86,8 +84,7 @@
             android:layout_below="@+id/radioGroup"
             android:layout_marginTop="32dp"
             android:text="@string/details"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
+            android:theme="@style/ToDoTextView" />
 
         <EditText
             android:id="@+id/detailsEditText"
@@ -129,8 +126,6 @@
                 android:layout_weight=".5"/>
 
         </LinearLayout>
-
-
 
     </RelativeLayout>
 
