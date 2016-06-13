@@ -1,9 +1,11 @@
 package com.psd.todo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -60,6 +62,28 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
             }
         });
 
+        todoAdapter.setOnItemLongClickListener(new ToDoAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View itemView, final int position) {
+                new AlertDialog.Builder(itemView.getContext())
+                        .setTitle("Remove item " + position + "?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //todoItems.get(position).delete(); //active android
+                                todoItems.remove(position);
+                                todoAdapter.notifyItemRemoved(position);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_delete)
+                        .show();
+            }
+        });
+
         todoItems.add(new ToDoItem("Help mom clean the house", ToDoItem.Priority.LOW));
         todoItems.add(new ToDoItem("Finish CodePath assignment", ToDoItem.Priority.NORMAL));
         todoItems.add(new ToDoItem("Drop 60 points in last game of career", ToDoItem.Priority.HIGH));
@@ -72,12 +96,6 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
         todoItems.add(new ToDoItem("Save the world", ToDoItem.Priority.HIGH));
         //when doing licecap do add drake's party change priority from normal to high
 
-        //LONG click
-//        todoItems.get(position).delete(); //active android
-//        todoItems.remove(position);
-//        todoAdapter.notifyDataSetChanged();
-//        return true;
-
     }
 
     @Override
@@ -88,7 +106,6 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
             todoItems.get(position).priority = (ToDoItem.Priority) data.getExtras().getSerializable("priority");
             todoItems.set(position, todoItems.get(position));
             todoAdapter.notifyItemChanged(position); //use for item specific updates
-            //writeItems();
 
             Toast.makeText(this, "Updated list item " + position, Toast.LENGTH_SHORT).show();
         }

@@ -16,15 +16,23 @@ import java.util.List;
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder> {
     private List<ToDoItem> todoList;
 
-    // Define listener member variable
-    private static OnItemClickListener mListener;
-    // Define the listener interface
+    // Define listener member variables
+    private static OnItemClickListener mClickListener;
+    private static OnItemLongClickListener mLongClickListener;
+
+    // Define the listener interface for normal/long clicks
     public interface OnItemClickListener {
         void onItemClick(View itemView, int position);
     }
+    public interface  OnItemLongClickListener {
+        void onItemLongClick(View itemView, int position);
+    }
     // Define the method that allows the parent activity or fragment to define the listener
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.mListener = listener;
+        mClickListener = listener;
+    }
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        mLongClickListener = listener;
     }
 
     public static class ToDoViewHolder extends RecyclerView.ViewHolder {
@@ -38,13 +46,21 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mListener != null) {
-                        mListener.onItemClick(v, getLayoutPosition());
+                    if (mClickListener != null) {
+                        mClickListener.onItemClick(v, getLayoutPosition());
                     }
                 }
             });
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (mLongClickListener != null) {
+                        mLongClickListener.onItemLongClick(v, getLayoutPosition());
+                    }
+                    return true;
+                }
+            });
         }
-
     }
 
     public ToDoAdapter(List<ToDoItem> todoList) {
