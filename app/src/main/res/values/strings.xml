@@ -6,7 +6,6 @@
     <string name="update">Update item</string>
     <string name="editDetails">Edit details:</string>
     <string name="dueDate">Due Date</string>
-    <string name="title_activity_to_do">ToDo</string>
     <string name="newTask">New Task</string>
     <string name="task">Task</string>
     <string name="priority">Priority</string>
