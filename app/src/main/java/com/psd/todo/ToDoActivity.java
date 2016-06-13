@@ -54,14 +54,23 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
             public void onItemClick(View itemView, int position) {
                 Intent i = new Intent(ToDoActivity.this, EditItemActivity.class);
                 i.putExtra("position", position);
-                i.putExtra("item", todoItems.get(position).task);
+                i.putExtra("task", todoItems.get(position).task);
+                i.putExtra("priority", todoItems.get(position).priority);
                 startActivityForResult(i, REQ_CODE1);
             }
         });
 
-        todoItems.add(new ToDoItem("Help mom with the cleaning", ToDoItem.Priority.LOW));
-        todoItems.add(new ToDoItem("Buy ticket to Senegal and bring her home", ToDoItem.Priority.NORMAL));
-        todoItems.add(new ToDoItem("Live a life of confident humility", ToDoItem.Priority.HIGH));
+        todoItems.add(new ToDoItem("Help mom clean the house", ToDoItem.Priority.LOW));
+        todoItems.add(new ToDoItem("Finish CodePath assignment", ToDoItem.Priority.NORMAL));
+        todoItems.add(new ToDoItem("Drop 60 points in last game of career", ToDoItem.Priority.HIGH));
+        todoItems.add(new ToDoItem("Fly to Senegal", ToDoItem.Priority.NORMAL));
+        todoItems.add(new ToDoItem("Wash the dishes", ToDoItem.Priority.LOW));
+        todoItems.add(new ToDoItem("Promote mixtape on psdofficial.com", ToDoItem.Priority.NORMAL));
+        todoItems.add(new ToDoItem("Help sister find a full time job", ToDoItem.Priority.NORMAL));
+        todoItems.add(new ToDoItem("Move out", ToDoItem.Priority.LOW));
+        todoItems.add(new ToDoItem("Squats, push-ups, crunches, bench press", ToDoItem.Priority.NORMAL));
+        todoItems.add(new ToDoItem("Save the world", ToDoItem.Priority.HIGH));
+        //when doing licecap do add drake's party change priority from normal to high
 
         //LONG click
 //        todoItems.get(position).delete(); //active android
@@ -76,6 +85,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
         if (requestCode == resultCode) {
             int position = data.getExtras().getInt("position");
             todoItems.get(position).task = data.getExtras().getString("newItem");
+            todoItems.get(position).priority = (ToDoItem.Priority) data.getExtras().getSerializable("priority");
             todoItems.set(position, todoItems.get(position));
             todoAdapter.notifyItemChanged(position); //use for item specific updates
             //writeItems();

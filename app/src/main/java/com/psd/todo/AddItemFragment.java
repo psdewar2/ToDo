@@ -72,8 +72,7 @@ public class AddItemFragment extends DialogFragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.lowPriority) priority = ToDoItem.Priority.LOW;
-                if (checkedId == R.id.highPriority) priority = ToDoItem.Priority.HIGH;
-                Toast.makeText(getContext(), "P is now " + priority.toString(), Toast.LENGTH_SHORT).show();
+                else if (checkedId == R.id.highPriority) priority = ToDoItem.Priority.HIGH;
             }
         });
 

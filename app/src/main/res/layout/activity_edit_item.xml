@@ -9,39 +9,62 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.psd.todo.EditItemActivity">
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/edit_item"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
+        android:id="@+id/etEditItem"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etEditItem"
-        android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save"
+        android:text="@string/update"
         android:id="@+id/saveButton"
         android:onClick="onSaveItem"
-        android:layout_below="@+id/etEditItem"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/changePriority"
+        android:id="@+id/changePriorityTextView"
         android:layout_marginTop="20dp"
+        android:layout_below="@+id/etEditItem"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/changePriorityTextView"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/radioGroupUpdate">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/low"
+            android:id="@+id/lowPriority" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/normal"
+            android:id="@+id/normPriority" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/high"
+            android:id="@+id/highPriority" />
+    </RadioGroup>
 
 </RelativeLayout>
