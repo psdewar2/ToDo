@@ -15,8 +15,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class AddItemFragment extends DialogFragment {
-    EditText newItemEditText;
+    EditText newItemEditText, detailsEditText;
     ToDoItem.Priority priority;
+    String details;
     Button addItemButton;
 
     OnToDoItemSelectedListener mListener;
@@ -76,19 +77,27 @@ public class AddItemFragment extends DialogFragment {
             }
         });
 
+        detailsEditText = (EditText) view.findViewById(R.id.detailsEditText);
+
         addItemButton = (Button) view.findViewById(R.id.btnAddItem);
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (newItemEditText.getText().toString().equals("")) {
+                String task = newItemEditText.getText().toString();
+                String details = detailsEditText.getText().toString();
+                if (task.equals("")) {
                     Toast.makeText(getContext(), "Please fill in the new task.", Toast.LENGTH_SHORT).show();
                 } else {
-                    String task = newItemEditText.getText().toString();
-                    mListener.sendData(new ToDoItem(task, priority));
+
+                    if (!details.equals("")) {
+                        mListener.sendData(new ToDoItem(task, priority, details));
+                    } else {
+                        mListener.sendData(new ToDoItem(task, priority));
+                    }
+
                     Toast.makeText(getContext(), newItemEditText.getText().toString(), Toast.LENGTH_SHORT).show();
                     dismiss();
                 }
-
             }
         });
 

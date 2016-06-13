@@ -12,18 +12,19 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etEditItem"
+        android:id="@+id/updateTaskEditText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:hint="@string/editTask" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/update"
         android:id="@+id/saveButton"
-        android:onClick="onSaveItem"
+        android:onClick="onUpdateItem"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -33,13 +34,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18sp"
+        android:textColor="#000000"
         android:text="@string/changePriority"
         android:id="@+id/changePriorityTextView"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/etEditItem"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/updateTaskEditText"
+        android:layout_alignStart="@id/updateTaskEditText"
+        android:layout_alignLeft="@id/updateTaskEditText"/>
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -66,5 +68,19 @@
             android:text="@string/high"
             android:id="@+id/highPriority" />
     </RadioGroup>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editDetailsEditText"
+        android:layout_below="@+id/radioGroupUpdate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="@string/addDetails"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

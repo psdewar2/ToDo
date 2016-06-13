@@ -34,7 +34,7 @@ public class ToDoItem extends Model {
     //Constructors
     public ToDoItem() {
         super();
-    }
+    } //required to use active android
 
     public ToDoItem(String task, Priority priority) {
         super();

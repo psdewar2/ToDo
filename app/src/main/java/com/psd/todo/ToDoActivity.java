@@ -58,6 +58,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
                 i.putExtra("position", position);
                 i.putExtra("task", todoItems.get(position).task);
                 i.putExtra("priority", todoItems.get(position).priority);
+                i.putExtra("details", todoItems.get(position).details);
                 startActivityForResult(i, REQ_CODE1);
             }
         });
@@ -102,8 +103,9 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == resultCode) {
             int position = data.getExtras().getInt("position");
-            todoItems.get(position).task = data.getExtras().getString("newItem");
+            todoItems.get(position).task = data.getExtras().getString("task");
             todoItems.get(position).priority = (ToDoItem.Priority) data.getExtras().getSerializable("priority");
+            todoItems.get(position).details = data.getExtras().getString("details");
             todoItems.set(position, todoItems.get(position));
             todoAdapter.notifyItemChanged(position); //use for item specific updates
 
