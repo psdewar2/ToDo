@@ -15,21 +15,22 @@ import java.util.List;
 @Table(name = "ToDoItems")
 public class ToDoItem extends Model {
     //Properties
-    @Column(name = "Task")
+
+    @Column(name = "task")
     protected String task;
 
     enum Priority {
-        HIGH, NORMAL, LOW;
+        HIGH, NORMAL, LOW
     }
 
-    @Column(name = "Priority")
+    @Column(name = "priority")
     protected Priority priority;
 
     Calendar c = Calendar.getInstance();
-    @Column(name = "Due Date")
+    @Column(name = "due_date")
     protected String dueDate;
 
-    @Column(name = "Details", index = true)
+    @Column(name = "details", index = true)
     protected String details;
 
     //Constructors

@@ -52,6 +52,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
         rvItems.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         rvItems.setAdapter(todoAdapter);
 
+        //goes to EditItemActivity
         todoAdapter.setOnItemClickListener(new ToDoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
@@ -65,6 +66,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
             }
         });
 
+        //removes item if confirmed in AlertDialog
         todoAdapter.setOnItemLongClickListener(new ToDoAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClick(View itemView, final int position) {
@@ -72,7 +74,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
                         .setTitle("Remove item " + position + "?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                //todoItems.get(position).delete(); //active android
+                                todoItems.get(position).delete(); //SQL C.R.U.Delete.
                                 todoItems.remove(position);
                                 todoAdapter.notifyItemRemoved(position);
                             }
@@ -87,17 +89,8 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
             }
         });
 
-        todoItems.add(new ToDoItem("Help mom clean the house", ToDoItem.Priority.LOW));
-        todoItems.add(new ToDoItem("Finish CodePath assignment", ToDoItem.Priority.NORMAL));
-        todoItems.add(new ToDoItem("Drop 60 points in last game of career", ToDoItem.Priority.HIGH));
-        todoItems.add(new ToDoItem("Fly to Senegal", ToDoItem.Priority.NORMAL));
-        todoItems.add(new ToDoItem("Wash the dishes", ToDoItem.Priority.LOW));
-        todoItems.add(new ToDoItem("Promote mixtape on psdofficial.com", ToDoItem.Priority.NORMAL));
-        todoItems.add(new ToDoItem("Help sister find a full time job", ToDoItem.Priority.NORMAL));
-        todoItems.add(new ToDoItem("Move out", ToDoItem.Priority.LOW));
-        todoItems.add(new ToDoItem("Squats, push-ups, crunches, bench press", ToDoItem.Priority.NORMAL));
-        todoItems.add(new ToDoItem("Save the world", ToDoItem.Priority.HIGH));
-        //when doing licecap do add drake's party change priority from normal to high
+        todoItems.addAll(ToDoItem.getAllItems()); //SQL C.Read.U.D.
+        todoAdapter.notifyDataSetChanged();
 
     }
 
@@ -110,18 +103,17 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
             todoItems.get(position).details = data.getExtras().getString("details");
             todoItems.get(position).dueDate = data.getExtras().getString("dueDate");
             todoItems.set(position, todoItems.get(position));
+            todoItems.get(position).save(); //SQL C.R.Update.D.
             todoAdapter.notifyItemChanged(position); //use for item specific updates
 
             Toast.makeText(this, "Updated list item " + position, Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void sendData(ToDoItem tdi) {
+    public void addItem(ToDoItem tdi) {
         todoItems.add(tdi);
-        todoAdapter.notifyDataSetChanged();
-
-//        todoAdapter.addAll(ToDoItem.getAllItems());
-//        Log.d("all items", "here " + ToDoItem.getAllItems());
+        tdi.save(); //SQL Create.R.U.D.
+        todoAdapter.notifyItemInserted(todoItems.indexOf(tdi));
     }
 
 

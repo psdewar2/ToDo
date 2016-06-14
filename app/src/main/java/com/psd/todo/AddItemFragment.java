@@ -26,7 +26,7 @@ public class AddItemFragment extends DialogFragment {
     } // Required empty public constructor
 
     public interface OnToDoItemSelectedListener {
-        void sendData(ToDoItem tdi);
+        void addItem(ToDoItem tdi);
     }
 
     public static AddItemFragment newInstance() {
@@ -92,9 +92,9 @@ public class AddItemFragment extends DialogFragment {
                 } else {
 
                     if (!details.equals("")) {
-                        mListener.sendData(new ToDoItem(task, priority, details));
+                        mListener.addItem(new ToDoItem(task, priority, details));
                     } else {
-                        mListener.sendData(new ToDoItem(task, priority));
+                        mListener.addItem(new ToDoItem(task, priority));
                     }
 
                     Toast.makeText(getContext(), newItemEditText.getText().toString(), Toast.LENGTH_SHORT).show();
