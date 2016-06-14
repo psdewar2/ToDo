@@ -70,7 +70,7 @@ public class EditItemActivity extends AppCompatActivity {
         changeDueDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
+                new DatePickerDialog(v.getContext(), R.style.ToDoDatePicker, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         dueDateTextView.setText(new StringBuilder().append("Due ").append(monthOfYear + 1).append("/")

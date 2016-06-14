@@ -9,5 +9,7 @@
 
     <color name="activityBackground">#F6D856</color>
 
-    <!--<color name="colorAccent">#F9D629</color>-->
+    <color name="colorLowPriority">#A200A2</color>
+    <color name="colorNormalPriority">#0000A2</color>
+    <color name="colorHighPriority">#E02444</color>
 </resources>

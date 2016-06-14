@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 public class AddItemFragment extends DialogFragment {
     EditText newItemEditText, detailsEditText;
+    RadioGroup radioGroup;
     Button addItemButton, cancelItemButton;
     String task, details;
     ToDoItem.Priority priority;
@@ -30,10 +31,6 @@ public class AddItemFragment extends DialogFragment {
     }
 
     public static AddItemFragment newInstance() {
-//        AddItemFragment fragment = new AddItemFragment();
-//        Bundle args = new Bundle();
-//        args.putString("title", title);
-//        fragment.setArguments(args);
         return new AddItemFragment();
     }
 
@@ -62,7 +59,7 @@ public class AddItemFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         newItemEditText = (EditText) view.findViewById(R.id.newTaskEditText);
-        RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         detailsEditText = (EditText) view.findViewById(R.id.detailsEditText);
         cancelItemButton = (Button) view.findViewById(R.id.cancelItem);
         addItemButton = (Button) view.findViewById(R.id.btnAddItem);

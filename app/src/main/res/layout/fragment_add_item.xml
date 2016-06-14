@@ -34,7 +34,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/newTaskTextView" />
+            android:layout_below="@+id/newTaskTextView"
+            android:theme="@style/ToDoEditText"/>
 
         <LinearLayout
             android:id="@+id/newPriorityLayout"
@@ -65,20 +66,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="@string/low" />
+                    android:text="@string/low"
+                    android:buttonTint="@color/colorLowPriority"
+                    tools:targetApi="lollipop" />
                 <RadioButton
                     android:id="@+id/normPriority"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="@string/normal" />
+                    android:text="@string/normal"
+                    android:buttonTint="@color/colorNormalPriority"
+                    tools:targetApi="lollipop"/>
 
                 <RadioButton
                     android:id="@+id/highPriority"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="@string/high" />
+                    android:text="@string/high"
+                    android:buttonTint="@color/colorHighPriority"
+                    tools:targetApi="lollipop"/>
             </RadioGroup>
 
         </LinearLayout>
@@ -104,7 +111,8 @@
             android:layout_alignEnd="@+id/btnLinearLayout"
             android:layout_below="@+id/details"
             android:inputType="textMultiLine"
-            android:ems="10" />
+            android:ems="10"
+            android:theme="@style/ToDoEditText"/>
 
         <LinearLayout
             android:id="@+id/btnLinearLayout"

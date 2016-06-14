@@ -2,6 +2,7 @@ package com.psd.todo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -70,8 +71,8 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
         todoAdapter.setOnItemLongClickListener(new ToDoAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClick(View itemView, final int position) {
-                new AlertDialog.Builder(itemView.getContext())
-                        .setTitle("Remove item " + position + "?")
+                final AlertDialog removalDialog = new AlertDialog.Builder(itemView.getContext())
+                        .setTitle("Remove from your list?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 todoItems.get(position).delete(); //SQL C.R.U.Delete.
@@ -85,7 +86,16 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
                             }
                         })
                         .setIcon(android.R.drawable.ic_menu_delete)
-                        .show();
+                        .create();
+                removalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+                        removalDialog.getWindow().setBackgroundDrawableResource(R.color.activityBackground);
+                        removalDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#89613D"));
+                        removalDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#89613D"));
+                    }
+                });
+                removalDialog.show();
             }
         });
 
