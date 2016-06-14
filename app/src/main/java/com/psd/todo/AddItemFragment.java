@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class AddItemFragment extends DialogFragment {
     EditText newItemEditText, detailsEditText;
     RadioGroup radioGroup;
@@ -75,6 +77,7 @@ public class AddItemFragment extends DialogFragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.lowPriority) priority = ToDoItem.Priority.LOW;
+                else if (checkedId == R.id.normPriority) priority = ToDoItem.Priority.NORMAL;
                 else if (checkedId == R.id.highPriority) priority = ToDoItem.Priority.HIGH;
             }
         });
@@ -87,14 +90,17 @@ public class AddItemFragment extends DialogFragment {
                 if (task.equals("")) {
                     Toast.makeText(getContext(), "Please fill in the new task.", Toast.LENGTH_SHORT).show();
                 } else {
+                    //get current date
+                    Calendar c = Calendar.getInstance();
+                    String currentDate = new StringBuilder().append("Due ").append(c.get(Calendar.MONTH) + 1).append("/")
+                            .append(c.get(Calendar.DAY_OF_MONTH)).append("/").append(c.get(Calendar.YEAR)).toString();
 
                     if (!details.equals("")) {
-                        mListener.addItem(new ToDoItem(task, priority, details));
+                        mListener.addItem(new ToDoItem(task, priority, details, currentDate));
                     } else {
-                        mListener.addItem(new ToDoItem(task, priority));
+                        mListener.addItem(new ToDoItem(task, priority, currentDate));
                     }
 
-                    Toast.makeText(getContext(), newItemEditText.getText().toString(), Toast.LENGTH_SHORT).show();
                     dismiss();
                 }
             }

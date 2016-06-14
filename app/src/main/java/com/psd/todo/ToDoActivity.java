@@ -11,7 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
@@ -20,9 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoActivity extends AppCompatActivity implements AddItemFragment.OnToDoItemSelectedListener {
-    private List<ToDoItem> todoItems = new ArrayList<>();
     RecyclerView rvItems;
     ToDoAdapter todoAdapter;
+    private List<ToDoItem> todoItems = new ArrayList<>();
 
     private final int REQ_CODE1 = 1;
 
@@ -106,6 +108,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //gets result from EditItemActivity
         if (requestCode == resultCode) {
             int position = data.getExtras().getInt("position");
             todoItems.get(position).task = data.getExtras().getString("task");
@@ -115,8 +118,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
             todoItems.set(position, todoItems.get(position));
             todoItems.get(position).save(); //SQL C.R.Update.D.
             todoAdapter.notifyItemChanged(position); //use for item specific updates
-
-            Toast.makeText(this, "Updated list item " + position, Toast.LENGTH_SHORT).show();
+            displayCompletionToast();
         }
     }
 
@@ -124,6 +126,18 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
         todoItems.add(tdi);
         tdi.save(); //SQL Create.R.U.D.
         todoAdapter.notifyItemInserted(todoItems.indexOf(tdi));
+        displayCompletionToast();
+    }
+
+    public void displayCompletionToast() {
+        //Displays completion image
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_custom,
+                (ViewGroup) findViewById(R.id.completionCheck));
+        Toast toast = new Toast(this);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 
 

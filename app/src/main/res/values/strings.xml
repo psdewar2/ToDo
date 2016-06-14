@@ -16,5 +16,6 @@
     <string name="changePriority">Change priority</string>
     <string name="addDetails">Add details here...</string>
     <string name="editTask">Edit task here...</string>
+    <string name="completion">Completion check</string>
 
 </resources>

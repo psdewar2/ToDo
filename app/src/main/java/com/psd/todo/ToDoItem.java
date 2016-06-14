@@ -38,22 +38,19 @@ public class ToDoItem extends Model {
         super();
     } //required to use active android
 
-    public ToDoItem(String task, Priority priority) {
+    public ToDoItem(String task, Priority priority, String dueDate) {
         super();
         this.task = task;
         this.priority = priority;
-
-        this.dueDate = "Due " + (c.get(Calendar.MONTH) + 1) + "/" +
-                        c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.YEAR);
+        this.dueDate = dueDate;
         this.details = "";
     }
 
-    public ToDoItem(String task, Priority priority, String details) {
+    public ToDoItem(String task, Priority priority, String details, String dueDate) {
         super();
         this.task = task;
         this.priority = priority;
-        this.dueDate = "Due " + (c.get(Calendar.MONTH) + 1) + "/" +
-                c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.YEAR);
+        this.dueDate = dueDate;
         this.details = details;
     }
 
