@@ -49,6 +49,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
         rvItems.setLayoutManager(mLayoutManager);
         rvItems.setHasFixedSize(true);
         rvItems.setItemAnimator(new DefaultItemAnimator());
+        rvItems.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         rvItems.setAdapter(todoAdapter);
 
         todoAdapter.setOnItemClickListener(new ToDoAdapter.OnItemClickListener() {
@@ -81,7 +82,7 @@ public class ToDoActivity extends AppCompatActivity implements AddItemFragment.O
                                 // do nothing
                             }
                         })
-                        .setIcon(android.R.drawable.ic_delete)
+                        .setIcon(android.R.drawable.ic_menu_delete)
                         .show();
             }
         });

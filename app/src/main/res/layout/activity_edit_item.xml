@@ -37,6 +37,8 @@
                 android:id="@+id/priorityLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 android:weightSum="1">
 
                 <TextView
@@ -92,6 +94,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/editDetailsEditText"
                 android:layout_marginTop="20dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 android:text="@string/dueDate"
                 android:theme="@style/ToDoTextView"/>
 

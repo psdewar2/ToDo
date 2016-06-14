@@ -9,10 +9,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:paddingBottom="@dimen/addItem_vertical_margin"
+        android:paddingLeft="@dimen/addItem_horizontal_margin"
+        android:paddingRight="@dimen/addItem_horizontal_margin"
+        android:paddingTop="@dimen/addItem_vertical_margin">
 
         <TextView
             android:id="@+id/newTaskTextView"
@@ -36,44 +36,52 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/newTaskTextView" />
 
-        <TextView
-            android:id="@+id/priorityTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/newPriorityLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/newTaskEditText"
             android:layout_marginTop="32dp"
-            android:text="@string/priority"
-            android:theme="@style/ToDoTextView" />
+            android:weightSum="1">
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/priorityTextView"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal">
-            <RadioButton
-                android:id="@+id/lowPriority"
+            <TextView
+                android:id="@+id/priorityTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/low" />
-            <RadioButton
-                android:id="@+id/normPriority"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/normal" />
+                android:layout_marginTop="3dp"
+                android:layout_weight=".05"
+                android:text="@string/priority"
+                android:theme="@style/ToDoTextView" />
 
-            <RadioButton
-                android:id="@+id/highPriority"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/high" />
-        </RadioGroup>
+                android:orientation="horizontal"
+                android:layout_weight=".95"
+                android:gravity="left">
+                <RadioButton
+                    android:id="@+id/lowPriority"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/low" />
+                <RadioButton
+                    android:id="@+id/normPriority"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/normal" />
+
+                <RadioButton
+                    android:id="@+id/highPriority"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/high" />
+            </RadioGroup>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/details"
@@ -81,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/radioGroup"
+            android:layout_below="@+id/newPriorityLayout"
             android:layout_marginTop="32dp"
             android:text="@string/details"
             android:theme="@style/ToDoTextView" />
