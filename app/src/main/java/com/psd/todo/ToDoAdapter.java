@@ -38,11 +38,13 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
     public static class ToDoViewHolder extends RecyclerView.ViewHolder {
         TextView task;
         TextView priority;
+        TextView dueDate;
 
         public ToDoViewHolder(View view) {
             super(view);
             task = (TextView) view.findViewById(R.id.task);
             priority = (TextView) view.findViewById(R.id.priority);
+            dueDate = (TextView) view.findViewById(R.id.dueDateListTextView);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -80,15 +82,21 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
         // Get the data item for this position
         ToDoItem tdItem = todoList.get(position);
         holder.task.setText(tdItem.task);
-        holder.priority.setText(String.valueOf(tdItem.priority));
+        holder.priority.setText(toLowercase(String.valueOf(tdItem.priority)));
+
         if (tdItem.priority == ToDoItem.Priority.LOW) holder.priority.setTextColor(Color.parseColor("#A200A2"));
         else if (tdItem.priority == ToDoItem.Priority.NORMAL) holder.priority.setTextColor(Color.parseColor("#0000A2"));
         else if (tdItem.priority == ToDoItem.Priority.HIGH) holder.priority.setTextColor(Color.parseColor("#E02444"));
 
+        holder.dueDate.setText(tdItem.dueDate.substring(4, tdItem.dueDate.length() - 5));
     }
 
     @Override
     public int getItemCount() {
         return todoList.size();
+    }
+
+    private String toLowercase(final String line) {
+        return line.charAt(0) + line.substring(1).toLowerCase();
     }
 }
