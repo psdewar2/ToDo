@@ -13,7 +13,7 @@ Completed user stories:
  * [x] Required: To-do items are persistent and properly retrieved after every app restart
  * [x] Optional: To-do items can be created, read, updated, and deleted with SQL instead of text files
  * [x] Optional: To-do list is populated with a RecyclerView which implements a custom adapter
- * [x] Optional: Due dates can be updated when editing the to-do item
+ * [x] Optional: Due dates are displayed in the RecyclerView and can be updated when editing the to-do item
  * [x] Optional: A DialogFragment instead of an Activity is used to add a new to-do item 
 
 ## Video Walkthrough 
